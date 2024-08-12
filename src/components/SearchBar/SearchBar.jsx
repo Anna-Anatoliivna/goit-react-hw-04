@@ -1,7 +1,8 @@
-// import styles from './SearchBar.module.css'
-// import toast, { Toaster } from 'react-hot-toast';
+import styles from './SearchBar.module.css'
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
-// const notify = () => toast('Here is your toast.');
+const notify = () => toast('Cant be empty');
 
 // const App = () => {
 //   return (
@@ -12,18 +13,33 @@
 //   );
 // };
 
-// export const SearchBar = ({ onSubmit }) => {
-//     return (
-//         <header className={styles.card}>
-//             <form>
-//                 <input
-//                     type="text"
-//                     autocomplete="off"
-//                     autofocus
-//                     placeholder="Search images and photos"
-//                 />
-//                 <button type="submit">Search</button>
-//             </form>
-//         </header>
-//     );
-// };
+export const SearchBar = ({ onSubmit }) => {
+    const [searchQuery, setSearchQuery] = useState('')
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value)
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!searchQuery.trim()){
+        //   return alert('cant be empty')
+        return <Toaster />
+    }
+    onSubmit(searchQuery)
+    setSearchQuery('')
+  }
+    return (
+        <header className={styles.card}>
+            <form onSubmit={handleSubmit}>
+                <input
+                    onChange={handleChange}
+                    type="text"
+                    autoComplete="off"
+                    autoFocus
+                    placeholder="Search images and photos"
+                />
+                <button onClick={notify} type="submit">Search</button>
+            </form>;
+        </header>
+    );
+};
