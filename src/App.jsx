@@ -29,7 +29,7 @@ import { ErrorMessage } from './components/ErrorMessage/ErrorMessage';
         const {
           // per_page,
           photos,
-          // total_results
+          // total_pages,
         } =
         await getImg (query,
           page);
