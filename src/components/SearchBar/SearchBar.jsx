@@ -30,7 +30,7 @@ export const SearchBar = ({ onSubmit }) => {
                     placeholder="Search images and photos"
                 />
           <button onClick={notify} type="submit">Search</button>
-          <Toaster />
+          {/* <Toaster /> */}
             </form>;
         </header>
     );

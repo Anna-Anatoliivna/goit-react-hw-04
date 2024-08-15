@@ -7,6 +7,7 @@ import { SearchBar } from './components/SearchBar/SearchBar';
 import { Loader } from './components/Loader/Loader';
 import { ErrorMessage } from './components/ErrorMessage/ErrorMessage';
 import { Button } from './components/Button/Button';
+import { ImageModal } from './components/ImageModal/ImageModal';
 
  const App = () => {
   const [query, setQuery] = useState("");
@@ -16,6 +17,9 @@ import { Button } from './components/Button/Button';
    const [isEmpty, setIsEmpty] = useState(false);
    const [loader, setLoader] = useState(false);
    const [isVisible, setIsVisible] = useState(false);
+   const [showModal, setShowModal] = useState(false);
+  const [modalSrc, setModalSrc] = useState("");
+  const [modalAlt, setModalAlt] = useState("");
  
 
   
@@ -55,13 +59,25 @@ import { Button } from './components/Button/Button';
    
    const onLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
+   };
+   
+   const openModal = (url, alt) => {
+    setShowModal(true);
+    setModalSrc(url);
+    setModalAlt(alt);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+    setModalSrc("");
+    setModalAlt("");
   };
 
   return (
     <>
-      <SearchBar onSubmit={onHandleSubmit}/>
-      <ImageGallery images={images} />
-      {isVisible && (
+      <SearchBar onSubmit={onHandleSubmit} />
+      {images.length > 0 && <ImageGallery openModal={openModal} images={images} />
+      }
+            {isVisible && (
         <Button onClick={onLoadMore} disabled={loader}>
           {loader ? "LOADING" : "Load More"}
         </Button>
@@ -73,7 +89,12 @@ import { Button } from './components/Button/Button';
       {isEmpty && (
         <ErrorMessage textAlign="center">Sorry. There are no images ... 😭</ErrorMessage>
       )}
-      
+<ImageModal
+        modalIsOpen={showModal}
+        src={modalSrc}
+        alt={modalAlt}
+        closeModal={closeModal}
+      />
     </>
   );
 };
