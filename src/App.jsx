@@ -26,13 +26,13 @@ import { Button } from './components/Button/Button';
       try {
         const {
           per_page,
-          images,
+          results,
           total_pages
         } =
         await getImg (query,
           page);
-   if (!images.length) return setIsEmpty(true);   
- setImages((prevImages) => [...prevImages, ...images]);
+   if (!results.length) return setIsEmpty(true);   
+ setImages((prevImages) => [...prevImages, ...results]);
         setIsVisible(page < Math.ceil(total_pages / per_page));
       } catch (error) {
         console.log(error);
