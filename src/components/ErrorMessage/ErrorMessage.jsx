@@ -1,10 +1,16 @@
 import styles from './ErrorMessage.module.css'
 
 
-export const ErrorMessage = () => {
+export const ErrorMessage = ({ children, textAlign = '', marginBottom = '0' }) => {
     return (
-        <div className={styles.card}>
-
-        </div>
+       <p
+      className={[
+        styles['text'],
+        styles[textAlign],
+        styles[`marginBottom${marginBottom}`],
+      ].join(' ')}
+    >
+      {children}
+    </p>
     );
 };
