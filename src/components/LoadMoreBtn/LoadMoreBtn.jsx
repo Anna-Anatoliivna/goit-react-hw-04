@@ -1,10 +1,10 @@
 import styles from './LoadMoreBtn.module.css'
 
 
-export const LoadMoreBtn = () => {
+export const LoadMoreBtn = ({children, onClick} ) => {
     return (
-        <div className={styles.card}>
-
-        </div>
+        <button type="button" onClick={ onClick} className={styles.btn}>
+{children}
+        </button>
     );
 };

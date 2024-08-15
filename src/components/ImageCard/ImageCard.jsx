@@ -1,10 +1,11 @@
 import styles from './ImageCard.module.css'
 
 
-export const ImageCard = ({ images, onGallaryClick, openModal }) => {
-    const ClickHandler = () => { onGallaryClick(images.id) };
-    return (
-        <div onClick={ClickHandler}>
+export const ImageCard = ({ images, openModal }) => {
+    // console.log(images);
+    
+        return (
+        <div>
             <img
                 className={styles.img}
                 src={images.urls.small}
